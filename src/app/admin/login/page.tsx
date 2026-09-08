@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import PageHeader from '@/components/layout/PageHeader';
 import { loginAdmin } from '@/lib/firebase/auth';
-import { Sun, Zap, Lock, Mail, ShieldCheck, ArrowRight, AlertCircle } from 'lucide-react';
+import { Lock, Mail, ShieldCheck, ArrowRight, AlertCircle } from 'lucide-react';
 
 export default function AdminLoginPage() {
   const router = useRouter();
@@ -25,26 +25,19 @@ export default function AdminLoginPage() {
       console.error('Erreur login:', err);
       setError(
         err.message ||
-          'Identifiants incorrects. Veuillez utiliser les identifiants administrateur.'
+          'Identifiants incorrects. Veuillez vérifier votre email et mot de passe.'
       );
     } finally {
       setLoading(false);
     }
   };
 
-  const handleUseDemo = () => {
-    setEmail('direction2a.business@gmail.com');
-    setPassword('@itadione1993');
-    setError(null);
-  };
-
   return (
     <div className="pb-20">
-      {/* En-tête obligatoire avec flèche de retour */}
       <PageHeader
         title="Connexion Administrateur"
-        subtitle="Accès sécurisé au tableau de bord 2A Business pour la gestion des projets, produits et commandes."
-        badge="Espace Réservé (Firebase Auth)"
+        subtitle="Accès sécurisé au tableau de bord 2A Business."
+        badge="Espace Réservé"
       />
 
       <div className="max-w-md mx-auto px-4 py-16">
@@ -58,25 +51,8 @@ export default function AdminLoginPage() {
               Espace d'Administration
             </h2>
             <p className="text-xs text-slate-500">
-              Authentification sécurisée avec Firebase Auth
+              Veuillez saisir vos identifiants pour continuer.
             </p>
-          </div>
-
-          {/* Bouton d'aide Démo Rapide */}
-          <div className="p-3.5 rounded-2xl bg-amber-50 border border-brand-gold-200 text-xs text-slate-700 flex items-center justify-between">
-            <div className="space-y-0.5">
-              <p className="font-bold text-slate-900">Compte Officiel Admin</p>
-              <p className="text-[11px] text-slate-600 truncate max-w-[200px]">
-                direction2a.business@gmail.com
-              </p>
-            </div>
-            <button
-              type="button"
-              onClick={handleUseDemo}
-              className="px-3 py-1.5 rounded-lg bg-brand-gold-500 hover:bg-brand-gold-400 text-slate-950 text-[11px] font-bold uppercase tracking-wider transition flex-shrink-0"
-            >
-              Remplir
-            </button>
           </div>
 
           {error && (
@@ -89,7 +65,7 @@ export default function AdminLoginPage() {
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
-                Adresse Email Admin
+                Adresse Email
               </label>
               <div className="relative">
                 <Mail className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
@@ -98,7 +74,8 @@ export default function AdminLoginPage() {
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="direction2a.business@gmail.com"
+                  placeholder="votre@email.com"
+                  autoComplete="email"
                   className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-gold-500 bg-slate-50 focus:bg-white"
                 />
               </div>
@@ -116,6 +93,7 @@ export default function AdminLoginPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
+                  autoComplete="current-password"
                   className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-gold-500 bg-slate-50 focus:bg-white"
                 />
               </div>
