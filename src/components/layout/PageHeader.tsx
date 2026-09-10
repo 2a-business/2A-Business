@@ -22,9 +22,15 @@ export default function PageHeader({
   const router = useRouter();
 
   const handleBack = () => {
-    if (typeof window !== 'undefined' && window.history.length > 1) {
+    if (
+      typeof window !== 'undefined' &&
+      document.referrer &&
+      document.referrer.startsWith(window.location.origin)
+    ) {
+      // L'utilisateur vient d'une page du site → retour sûr
       router.back();
     } else {
+      // Arrivée directe (onglet vide, lien externe, favori…) → page d'accueil
       router.push(fallbackHref);
     }
   };

@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { MediaItem } from '@/types';
 import { getMedias } from '@/lib/firebase/firestore';
-import { uploadImage, deleteStorageImage } from '@/lib/firebase/storage';
+import { uploadImageToCloudinary } from '@/lib/cloudinary';
 import { formatDateTime } from '@/lib/utils';
 import {
   Upload,
@@ -13,7 +13,6 @@ import {
   Check,
   Image as ImageIcon,
   ExternalLink,
-  ShieldCheck,
   HardDrive,
 } from 'lucide-react';
 
@@ -41,19 +40,19 @@ export default function MediaGallery() {
 
     setIsUploading(true);
     try {
-      await uploadImage(file, 'medias');
+      await uploadImageToCloudinary(file);
       await loadMedias();
     } catch (err) {
       console.error('Erreur upload:', err);
+      alert("Erreur lors de l'envoi de l'image.");
     } finally {
       setIsUploading(false);
     }
   };
 
   const handleDelete = async (media: MediaItem) => {
-    if (confirm(`Supprimer l'image "${media.nom}" ?`)) {
+    if (confirm(`Supprimer l'image "${media.nom}" de la liste ?`)) {
       try {
-        await deleteStorageImage(media);
         await loadMedias();
       } catch (err) {
         console.error('Erreur suppression média:', err);
@@ -69,13 +68,13 @@ export default function MediaGallery() {
 
   return (
     <div className="space-y-8">
-      {/* Notice Technique Firebase Storage */}
+      {/* Notice Technique Cloudinary */}
       <div className="p-4 rounded-2xl bg-blue-50 border border-blue-200 text-blue-900 flex items-start space-x-3 text-xs">
         <HardDrive className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
         <div>
-          <p className="font-bold">Espace Centralisé Firebase Storage</p>
+          <p className="font-bold">Espace Centralisé Cloudinary</p>
           <p className="text-blue-800 mt-0.5">
-            Les fichiers binaires d'images sont transférés et hébergés physiquement sur le bucket sécurisé <strong>Firebase Storage</strong>. Seules leurs URL de téléchargement HTTPS sécurisées sont stockées et manipulées dans la base de données Firestore.
+            Les fichiers binaires d'images sont transférés et hébergés de manière sécurisée sur <strong>Cloudinary</strong> (sans carte bancaire). Seules leurs URL de téléchargement HTTPS sont stockées et manipulées dans la base de données Firestore.
           </p>
         </div>
       </div>
@@ -91,7 +90,7 @@ export default function MediaGallery() {
               Uploader une nouvelle image
             </h3>
             <p className="text-xs text-slate-500 mt-1">
-              PNG, JPG, WebP jusqu'à 10 Mo. L'image sera immédiatement disponible pour vos projets et fiches produits.
+              PNG, JPG, WebP. L'image sera immédiatement disponible pour vos projets et fiches produits.
             </p>
           </div>
 

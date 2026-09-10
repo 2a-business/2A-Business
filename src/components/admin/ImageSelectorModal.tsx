@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { MediaItem } from '@/types';
 import { getMedias } from '@/lib/firebase/firestore';
-import { uploadImage } from '@/lib/firebase/storage';
+import { uploadImageToCloudinary } from '@/lib/cloudinary';
 import { X, Upload, Check, Image as ImageIcon, Search } from 'lucide-react';
 
 interface ImageSelectorModalProps {
@@ -50,12 +50,13 @@ export default function ImageSelectorModal({
 
     setIsUploading(true);
     try {
-      const newMedia = await uploadImage(file, 'catalogue');
+      const cloudinaryUrl = await uploadImageToCloudinary(file);
       await loadMedias();
-      setSelectedUrl(newMedia.url);
+      setSelectedUrl(cloudinaryUrl);
       setTab('gallery');
     } catch (err) {
-      console.error('Erreur upload image:', err);
+      console.error('Erreur upload image Cloudinary:', err);
+      alert("Erreur lors de l'envoi de l'image.");
     } finally {
       setIsUploading(false);
     }
@@ -170,7 +171,7 @@ export default function ImageSelectorModal({
                 Glissez une image ou cliquez pour parcourir
               </p>
               <p className="text-xs text-slate-500 mt-1 mb-4">
-                JPG, PNG ou WebP. Le fichier sera stocké sur Firebase Storage et ajouté à la médiathèque.
+                JPG, PNG ou WebP. L'image sera stockée sur Cloudinary et ajoutée à la médiathèque.
               </p>
               <label className="cursor-pointer px-5 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold transition shadow-sm">
                 <span>{isUploading ? 'Téléchargement en cours...' : 'Choisir un fichier'}</span>

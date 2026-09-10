@@ -38,6 +38,7 @@ export default function AdminLoginPage() {
         title="Connexion Administrateur"
         subtitle="Accès sécurisé au tableau de bord 2A Business."
         badge="Espace Réservé"
+        fallbackHref="/"
       />
 
       <div className="max-w-md mx-auto px-4 py-16">

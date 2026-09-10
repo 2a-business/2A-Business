@@ -379,10 +379,10 @@ export default function ProductsAdmin() {
                 </div>
               </div>
 
-              {/* Image (Upload direct ou Médiathèque) */}
+              {/* Image (Upload Cloudinary ou Médiathèque) */}
               <div>
                 <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
-                  Image Produit (Firebase Storage) *
+                  Image Produit (Cloudinary) *
                 </label>
                 <div className="flex items-center space-x-4 p-3 rounded-2xl border border-slate-200 bg-slate-50">
                   <div className="relative w-20 h-20 rounded-xl bg-slate-200 overflow-hidden flex-shrink-0 border border-slate-300">
@@ -405,7 +405,7 @@ export default function ProductsAdmin() {
                       className="px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold transition flex items-center space-x-2"
                     >
                       <ImageIcon className="w-3.5 h-3.5 text-brand-gold-400" />
-                      <span>Choisir une image (Upload ou Médiathèque)</span>
+                      <span>Choisir une image (Cloudinary ou Médiathèque)</span>
                     </button>
                     <p className="text-[10px] text-slate-400">
                       URL : <span className="text-slate-600 truncate inline-block max-w-xs align-bottom">{formData.image_url}</span>
