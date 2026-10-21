@@ -205,7 +205,7 @@ L'application fonctionne **sans configuration Firebase** grâce à un système d
 |---|---|
 | **URL** | `/admin/login` |
 | **Email** | `direction2a.business@gmail.com` |
-| **Mot de passe** | `@itadione1993` |
+| **Mot de passe** | `*************` |
 
 > **Note :** La page de connexion dispose d'un bouton "Remplir automatiquement" pour faciliter la saisie.
 
@@ -394,9 +394,9 @@ firebase deploy
 
 | Champ | Valeur |
 |---|---|
-| **URL Admin** | `http://votre-domaine.com/admin/login` |
-| **Email admin** | `direction2a.business@gmail.com` |
-| **Mot de passe** | `@itadione1993` |
+| **URL Admin** | `*****************` |
+| **Email admin** | `******************` |
+| **Mot de passe** | `**************` |
 | **WhatsApp (bouton)** | wa.me/221770620408 |
 | **Téléphone principal** | +221 77 062 04 08 |
 | **Téléphone secondaire** | +221 77 378 33 68 |
