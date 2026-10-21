@@ -311,7 +311,7 @@ npm start
 ### Créer l'utilisateur admin dans Firebase Auth
 
 1. Firebase Console → Authentication → Users
-2. Ajouter : Email `direction2a.business@gmail.com` / Mot de passe `@itadione1993`
+2. Ajouter : Email `direction2a.business@gmail.com` / Mot de passe "********"
 
 ### Remplir `.env.local`
 
